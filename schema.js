@@ -21,7 +21,7 @@ const typeDefs = gql`
             description: String!, 
             image: String!, 
             author: String!):Post
-            deletePost(ud: Int!):Boolean
+            deletePost(id: Int!):Boolean
             likePost(id: Int!):Boolean
     }
 `

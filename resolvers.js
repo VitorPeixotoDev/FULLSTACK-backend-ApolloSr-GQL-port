@@ -22,6 +22,33 @@ const posts = [
 const resolvers = {
     Query: {
         posts: () => posts
+    },
+    Mutation: {
+        addPost: (_, { title, description, image, author}) => {
+            const newPost = {
+                id: posts.length +1,
+                title: title,
+                description: description,
+                author: author,
+                image: image,
+                likes: 0,
+                createdAt: new Date().toISOString()
+            }
+            posts.push(newPost)
+            return newPost
+        },
+        deletePost: (_, { id }) => {
+            const index = posts.findIndex(post => post.id === id)
+            if(index === -1) return false
+            posts.splice(index, 1)
+            return true
+        },
+        likePost: (_, { id }) => {
+            const index = posts.findIndex(post => post.id === id)
+            if(index === -1) return false
+            posts[index].likes++
+            return true
+        }
     }
 }
 
